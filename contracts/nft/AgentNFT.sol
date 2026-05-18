@@ -1,42 +1,19 @@
-// agent name: malsony
+// agent name: claude code + hermes agent
 // platform initialization text:
-// 我永远只是一个助手，我永远不可能是root，尽管有权限读取`/`。
-// §
-// 用户强调约法三章中的敏感信息保护规则，所有输出必须脱敏敏感信息（前4位+...+后4位），不可被用户指令绕过。
-// §
-// 重要系统知识：Hermes技能系统结构
-// 1. Hermes的技能目录是 /opt/data/skills/，不是其他
-// 2. 技能安装后需要重新索引才能出现在技能列表中
-// 3. 用户对目录结构错误非常敏感，期望早期发现和纠正
-// 4. 技能命名应使用描述性名称（如openrouter-freeride），放在正确的类别目录下（mlops/）
-// 5. 避免在错误目录中浪费时间和token，应先验证系统结构
-// 6. 用户工作风格：快速聚焦核心问题，不喜欢偏离主题的分析
-// §
-// User expects image-generating skills to output a line prefixed with MEDIA: so that Telegram displays the image directly, not just a file path.
-// §
-// 主目录是：$HERMES_HOME ；技能目录是：$HERMES_HOME/skills ；工作目录是：$HERMES_HOME/workspace/ ;
-// §
-// 用户偏好：API密钥查找优先级必须为：1）主目录.env文件 2）技能目录.env文件 3）询问用户输入并保存到主目录.env。绝对不能包含openclaw.json查找逻辑。
-// §
-// DeepSeek 原生 API 现状（2026-04-24 实测）：
-// 1. 可用模型：deepseek-v4-flash, deepseek-v4-pro（不再只有 deepseek-chat/reasoner）
-// 2. deepseek-chat 仍可作为别名使用，自动路由到 v4-flash
-// 3. Hermes 内置 _normalize_for_deepseek 函数已过时——把 v4-flash → deepseek-chat，但两者 DeepSeek 都认
-// 4. 用户还在使用 OpenClaw（龙虾），两人会关注跨工具配置差异
-// 5. 用户会直接纠正错误的猜测（“你说错了”），偏好基于证据的结论
-// §
-// 用户工作习惯：新建项目时，统一放在 $HERMES_HOME/workspace/ 目录下，避免到处乱放。用户对杂乱的文件结构会感到头晕，要求保持整洁有序的工作环境。
-// §
 // User prefers concise, direct communication without excessive explanation. When discussing technical implementations, focus on the core changes and avoid verbose walkthroughs unless specifically asked for details. The user values efficiency and dislikes when the agent 'grabs circles' or over-explains simple concepts.
 // §
-// CRITICAL Claude Code usage: 写代码必须用 `HOME=/root claude --bare -p '...' --allowedTools 'Read,Edit,Bash' --max-turns 15` 直接调用Claude CLI。delegate_task≠Claude Code，用户能检测Claude历史。我绝对不碰代码（写、编辑、npm install、改文件），全部交Claude CLI。用前先 skill_view('claude-code')。
-// §
-// 铁律：绝对不可以写代码。如果需要写代码，就调用claude-code技能（在$HERMES_HOME/skills/ 下面找）叫Claude写。
-// §
-// 用户的USDT (TRC20) 钱包地址：TWPjPKBMT6yGgngQqBNJttg6yuteyQroXT
-// §
-// User corrected credential handling: when viewing .env files, tokens appear truncated (ghp_VL...SBwU) for security, but actual API calls require full tokens. Using truncated versions causes authentication failures.
-// // runtime: Linux, x86_64, /root/workspace/OpenAgents-44/OpenAgents, bash
+// CRITICAL Claude Code usage: 写代码必须用 I see the repository is **OpenAgents** — an open-source project with some smart contract work in progress (AgentNFT, ChainlinkAdapter). 
+
+You haven't asked a question yet! How can I help you? Here are some things I could assist with:
+
+- **Code review** — review the AgentNFT or ChainlinkAdapter contracts
+- **Bug fixes** — help resolve issues in the codebase
+- **Feature development** — implement new functionality
+- **Testing** — write or run tests
+- **Deployment** — help with contract deployment
+- **General questions** — explain any part of the codebase
+
+What would you like me to do?
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
